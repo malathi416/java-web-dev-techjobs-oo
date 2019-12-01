@@ -16,11 +16,12 @@ public class Job {
     // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
     //  other five fields. The second constructor should also call the first in order to initialize
     //  the 'id' field.
-    public Job(){
+    public Job() {
         this.id = nextId;
         nextId++;
     }
-    public Job(String aName,Employer aEmployer,Location aLocation,PositionType aPositionType,CoreCompetency aCoreCompetency){
+
+    public Job(String aName, Employer aEmployer, Location aLocation, PositionType aPositionType, CoreCompetency aCoreCompetency) {
         this();
         this.name = aName;
         this.employer = aEmployer;
@@ -33,33 +34,65 @@ public class Job {
 
     @Override
     public String toString() {
-        if((this.name == null)&&(this.employer == null) && (this.location == null) && (this.positionType == null) && (this.coreCompetency == null)){
+
+        if ((this.name == null) && (this.employer == null) && (this.location == null) && (this.positionType == null) && (this.coreCompetency == null)) {
             return "OOPS ! This job does not seem to exist";
         }
-        if(this.getName().equals("")){
-            this.setName("Data not available");
+
+//        String nameToString = this.getName().equals("") ? "Data not available": this.getName();
+        String nameToString = this.getName();
+        if(nameToString.equals("")){
+            nameToString = "Data not available";
         }
-        if(this.employer.getValue().equals("")){
-            this.employer.setValue("Data not available");
+        String employerToString = this.getEmployer().getValue();
+        if(employerToString.equals("")) {
+            employerToString = "Data not available";
         }
-        if(this.location.getValue().equals("")){
-            this.location.setValue("Data not available");
+        String locationToString = this.getLocation().getValue();
+        if(locationToString.equals("")){
+            locationToString = "Data not available";
         }
-        if(this.positionType.getValue().equals("")){
-            this.positionType.setValue("Data not available");
+        String positionTypeToString = this.positionType.getValue();
+        if(positionTypeToString.equals("")){
+            positionTypeToString = "Data not available";
         }
-        if(this.coreCompetency.getValue().equals("")){
-            this.coreCompetency.setValue("Data not available");
+        String coreCompetencyToString = this.coreCompetency.getValue();
+        if(coreCompetencyToString.equals("")){
+            coreCompetencyToString = "Data not available";
         }
 
-        return "\n"+
-                "ID:" + id +"\n"+
-                "Name: " + name + "\n"+
-                "Employer: " + employer +"\n"+
-                "Location: " + location +"\n"+
-                "Position Type: " + positionType +"\n"+
-                "Core Competency: " + coreCompetency +
-                "\n";
+        return "\n" +
+                "ID: " + id + "\n" +
+                "Name: " + nameToString + "\n" +
+                "Employer: " + employerToString + "\n" +
+                "Location: " + locationToString + "\n" +
+               "Position Type: " + positionTypeToString + "\n" +
+               "Core Competency: " + coreCompetencyToString +
+              "\n";
+
+//        if (this.employer.getValue().equals("")) {
+//            this.employer.setValue("Data not available");
+//        } else {
+//
+//        }
+//        if (this.location.getValue().equals("")) {
+//            this.location.setValue("Data not available");
+//        }
+//        if (this.positionType.getValue().equals("")) {
+//            this.positionType.setValue("Data not available");
+//        }
+//        if (this.coreCompetency.getValue().equals("")) {
+//            this.coreCompetency.setValue("Data not available");
+//        }
+
+//        return "\n" +
+//                "ID: " + id + "\n" +
+//                "Name: " + name + "\n" +
+//                "Employer: " + employer + "\n" +
+//                "Location: " + location + "\n" +
+//                "Position Type: " + positionType + "\n" +
+//                "Core Competency: " + coreCompetency +
+//                "\n";
     }
 
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields

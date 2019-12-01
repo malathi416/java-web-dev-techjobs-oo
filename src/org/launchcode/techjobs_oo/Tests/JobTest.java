@@ -10,7 +10,6 @@ public class JobTest {
 
     Job testJob1;
     Job testJob2;
-    Job testJob3;
     Job testJob4;
 
 
@@ -18,7 +17,6 @@ public class JobTest {
     public void creatingTestJobObject() {
         testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        testJob3 = new Job("Product tester", new Employer(""), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         testJob4 = new Job();
     }
 
@@ -50,26 +48,35 @@ public class JobTest {
     public void firstTestToString() {
         assertTrue(testJob1.toString().startsWith("\n"));
         assertTrue(testJob1.toString().endsWith("\n"));
+    }
 
-    }
     @Test // TODO: How to check new line before each label. Need to write test case.
-    public void secondTestToString(){
-        assertFalse(testJob1.equals("\n"+
-                "ID:" +testJob1.getId()+"\n" +
-                "Name:'" + testJob1.getName() + '\n' +
-                "Employer:" + testJob1.getEmployer() +"\n"+
-                "Location:" + testJob1.getLocation() +"\n"+
-                "Position Type:" + testJob1.getPositionType() +"\n"+
-                "Core Competency:" + testJob1.getCoreCompetency() +
-                "\n"));
+    public void secondTestToString() {
+        String actualToString = testJob1.toString();
+        String expectedToString = "\n" +
+                "ID: " + testJob1.getId() + "\n" +
+                "Name: " + testJob1.getName() + '\n' +
+                "Employer: " + testJob1.getEmployer() + "\n" +
+                "Location: " + testJob1.getLocation() + "\n" +
+                "Position Type: " + testJob1.getPositionType() + "\n" +
+                "Core Competency: " + testJob1.getCoreCompetency() +
+                "\n";
+        assertEquals(expectedToString, actualToString);
     }
+
     @Test
-    public void thirdTestToString(){
-        assertFalse(testJob3.getEmployer().equals("Data not available"));
+    public void testJobWithNoEmployer() {
+        Job jobNoEmployer = new Job("Product tester", new Employer(""), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String jobToString = jobNoEmployer.toString();
+        assertTrue(jobToString.contains("Employer: "));
+        String expectedString = "Employer: Data not available";
+        assertTrue(jobToString.startsWith(expectedString, jobToString.indexOf("Employer: ")));
+        assertEquals("", jobNoEmployer.getEmployer().getValue());
     }
+
     @Test
-    public void fourthTestToString(){
-        assertEquals("OOPS ! This job does not seem to exist",testJob4.toString());
+    public void fourthTestToString() {
+        assertEquals("OOPS ! This job does not seem to exist", testJob4.toString());
     }
 
 }

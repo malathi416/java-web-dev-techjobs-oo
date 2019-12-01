@@ -18,7 +18,10 @@ public class JobField {
 
     @Override
     public String toString() {
-        return value;
+        return "JobField{" +
+                "id=" + id +
+                ", value='" + value + '\'' +
+                '}';
     }
 
     @Override
@@ -32,7 +35,7 @@ public class JobField {
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(id, value);
     }
 
     public int getId() {
