@@ -5,38 +5,71 @@ import org.junit.Test;
 import org.launchcode.techjobs_oo.*;
 
 import static org.junit.Assert.*;
+
 public class JobTest {
+
     Job testJob1;
     Job testJob2;
-    Job testJob;
-    @Before
+    Job testJob3;
+    Job testJob4;
 
-    public void creatingTestJobObject(){
-     testJob1 = new Job();
-     testJob2 = new Job();
-    }
-    @Test
-    public void testSettingJobId(){
-        assertTrue(testJob1.getId()!=testJob2.getId());
-    }
-    @Test
-    public void testJobIdDifferBy1(){
-        assertEquals(1,testJob2.getId()-testJob1.getId());
-    }
-    @Test
-    public void testJobConstructorSetsAllFields(){
-        // testJob = new Job("Product tester","ACME","Desert","Quality control", "Persistence");
-        testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        assertTrue(testJob.getEmployer() instanceof Employer);
-        assertTrue(testJob.getLocation() instanceof Location);
-        assertTrue(testJob.getPositionType() instanceof PositionType);
-        assertTrue(testJob.getCoreCompetency() instanceof CoreCompetency);
-        assertEquals("Product tester",testJob.getName());
-    }
-    @Test
-    public void testJobsForEquality(){
+
+    @Before
+    public void creatingTestJobObject() {
         testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        testJob3 = new Job("Product tester", new Employer(""), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        testJob4 = new Job();
+    }
+
+    @Test
+    public void testSettingJobId() {
+        assertTrue(testJob1.getId() != testJob2.getId());
+    }
+
+    @Test
+    public void testJobIdDifferBy1() {
+        assertEquals(1, testJob2.getId() - testJob1.getId());
+    }
+
+    @Test
+    public void testJobConstructorSetsAllFields() {
+        assertTrue(testJob1.getEmployer() instanceof Employer);
+        assertTrue(testJob1.getLocation() instanceof Location);
+        assertTrue(testJob1.getPositionType() instanceof PositionType);
+        assertTrue(testJob1.getCoreCompetency() instanceof CoreCompetency);
+        assertEquals("Product tester", testJob1.getName());
+    }
+
+    @Test
+    public void testJobsForEquality() {
         assertFalse(testJob1.equals(testJob2));
     }
+
+    @Test
+    public void firstTestToString() {
+        assertTrue(testJob1.toString().startsWith("\n"));
+        assertTrue(testJob1.toString().endsWith("\n"));
+
+    }
+    @Test // TODO: How to check new line before each label. Need to write test case.
+    public void secondTestToString(){
+        assertFalse(testJob1.equals("\n"+
+                "ID:" +testJob1.getId()+"\n" +
+                "Name:'" + testJob1.getName() + '\n' +
+                "Employer:" + testJob1.getEmployer() +"\n"+
+                "Location:" + testJob1.getLocation() +"\n"+
+                "Position Type:" + testJob1.getPositionType() +"\n"+
+                "Core Competency:" + testJob1.getCoreCompetency() +
+                "\n"));
+    }
+    @Test
+    public void thirdTestToString(){
+        assertFalse(testJob3.getEmployer().equals("Data not available"));
+    }
+    @Test
+    public void fourthTestToString(){
+        assertEquals("OOPS ! This job does not seem to exist",testJob4.toString());
+    }
+
 }
