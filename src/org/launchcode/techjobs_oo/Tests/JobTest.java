@@ -8,17 +8,11 @@ import static org.junit.Assert.*;
 
 public class JobTest {
 
-    Job testJob1;
-    Job testJob2;
-    Job testJob4;
+   private static Job testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+   private static Job testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+   private static Job testJob4 = new Job();
 
 
-    @Before
-    public void creatingTestJobObject() {
-        testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        testJob4 = new Job();
-    }
 
     @Test
     public void testSettingJobId() {
@@ -54,12 +48,12 @@ public class JobTest {
     public void secondTestToString() {
         String actualToString = testJob1.toString();
         String expectedToString = "\n" +
-                "ID: " + testJob1.getId() + "\n" +
-                "Name: " + testJob1.getName() + '\n' +
-                "Employer: " + testJob1.getEmployer() + "\n" +
-                "Location: " + testJob1.getLocation() + "\n" +
-                "Position Type: " + testJob1.getPositionType() + "\n" +
-                "Core Competency: " + testJob1.getCoreCompetency() +
+                "ID: 1\n" +
+                "Name: " + "Product tester" + '\n' +
+                "Employer: " + "ACME" + "\n" +
+                "Location: " + "Desert"+ "\n" +
+                "Position Type: " + "Quality control" + "\n" +
+                "Core Competency: " + "Persistence" +
                 "\n";
         assertEquals(expectedToString, actualToString);
     }
@@ -71,11 +65,10 @@ public class JobTest {
         assertTrue(jobToString.contains("Employer: "));
         String expectedString = "Employer: Data not available";
         assertTrue(jobToString.startsWith(expectedString, jobToString.indexOf("Employer: ")));
-        assertEquals("", jobNoEmployer.getEmployer().getValue());
     }
 
     @Test
-    public void fourthTestToString() {
+    public void testJobAllFieldsNullValues() {
         assertEquals("OOPS ! This job does not seem to exist", testJob4.toString());
     }
 
